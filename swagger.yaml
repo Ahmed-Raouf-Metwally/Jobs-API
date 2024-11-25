@@ -1,0 +1,153 @@
+openapi: 3.0.0
+info:
+  title: Jobs-API
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000/api/v1
+
+    description: Local server
+  - url: https://your-production-url.com
+    description: Production server
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+tags:
+  - name: Auth
+  - name: Jobs
+paths:
+  /auth/register:
+    post:
+      tags:
+        - Auth
+      summary: Register
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                name: raouf1
+                email: raouf1@mail.net
+                password: '123456'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /auth/login:
+    post:
+      tags:
+        - Auth
+      summary: login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                email: raouf@mail.net
+                password: '123456'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /jobs:
+    post:
+      tags:
+        - Jobs
+      summary: create job
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                company: netflix
+                position: backend dev
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: >-
+            Bearer
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzQzOGM4NGQ5YzQxYmY2YWVmY2ZhZDgiLCJuYW1lIjoicmFvdWYiLCJpYXQiOjE3MzI0ODAxMzIsImV4cCI6MTczNTA3MjEzMn0.Ev8vTruf9V0sumtyq7uKxyeX06m7WJK4QAmqv1mPKqw
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    get:
+      tags:
+        - Jobs
+      summary: get all jobs
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            type: string
+          example: >-
+            Bearer
+            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzQzOGM4NGQ5YzQxYmY2YWVmY2ZhZDgiLCJuYW1lIjoicmFvdWYiLCJpYXQiOjE3MzI0ODAxMzIsImV4cCI6MTczNTA3MjEzMn0.Ev8vTruf9V0sumtyq7uKxyeX06m7WJK4QAmqv1mPKqw
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /jobs/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: The job ID
+    get:
+      tags:
+        - Jobs
+      summary: get single job
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  
+    patch:
+      tags:
+        - Jobs
+      summary: update job
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                company: random
+                position: fullstack dev
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    delete:
+      tags:
+        - Jobs
+      summary: delete job
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
