@@ -1,106 +1,92 @@
 openapi: 3.0.0
 info:
-  title: Jobs-API
-  version: 1.0.0
+  title: Jobs API
+  contact: {}
+  version: '1.0'
 servers:
   - url: http://localhost:3000/api/v1
-
-    description: Local server
-  - url: https://your-production-url.com
-    description: Production server
-components:
-  securitySchemes:
-    bearerAuth:
-      type: http
-      scheme: bearer
-tags:
-  - name: Auth
-  - name: Jobs
+    variables: {}
 paths:
   /auth/register:
     post:
       tags:
         - Auth
-      summary: Register
+      summary: Register User
+      operationId: RegisterUser
+      parameters: []
       requestBody:
+        description: ''
         content:
           application/json:
             schema:
-              type: object
-              example:
-                name: raouf1
-                email: raouf1@mail.net
-                password: '123456'
+              $ref: '#/components/schemas/RegisterUserRequest'
+            example:
+              name: bob
+              email: bob@gmail.com
+              password: secret
+        required: true
       responses:
         '200':
-          description: Successful response
-          content:
-            application/json: {}
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
   /auth/login:
     post:
       tags:
         - Auth
-      summary: login
+      summary: Login User
+      operationId: LoginUser
+      parameters: []
       requestBody:
+        description: ''
         content:
           application/json:
             schema:
-              type: object
-              example:
-                email: raouf@mail.net
-                password: '123456'
+              $ref: '#/components/schemas/LoginUserRequest'
+            example:
+              email: susan@gmail.com
+              password: secret
+        required: true
       responses:
         '200':
-          description: Successful response
-          content:
-            application/json: {}
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
   /jobs:
     post:
       tags:
         - Jobs
-      summary: create job
+      summary: Create Job
+      operationId: CreateJob
+      parameters: []
       requestBody:
+        description: ''
         content:
           application/json:
             schema:
-              type: object
-              example:
-                company: netflix
-                position: backend dev
-      security:
-        - bearerAuth: []
-      parameters:
-        - name: Authorization
-          in: header
-          schema:
-            type: string
-          example: >-
-            Bearer
-            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzQzOGM4NGQ5YzQxYmY2YWVmY2ZhZDgiLCJuYW1lIjoicmFvdWYiLCJpYXQiOjE3MzI0ODAxMzIsImV4cCI6MTczNTA3MjEzMn0.Ev8vTruf9V0sumtyq7uKxyeX06m7WJK4QAmqv1mPKqw
+              $ref: '#/components/schemas/CreateJobRequest'
+            example:
+              company: google
+              position: front-end developer
+        required: true
       responses:
         '200':
-          description: Successful response
-          content:
-            application/json: {}
+          description: ''
+          headers: {}
+      deprecated: false
     get:
       tags:
         - Jobs
-      summary: get all jobs
-      security:
-        - bearerAuth: []
-      parameters:
-        - name: Authorization
-          in: header
-          schema:
-            type: string
-          example: >-
-            Bearer
-            eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzQzOGM4NGQ5YzQxYmY2YWVmY2ZhZDgiLCJuYW1lIjoicmFvdWYiLCJpYXQiOjE3MzI0ODAxMzIsImV4cCI6MTczNTA3MjEzMn0.Ev8vTruf9V0sumtyq7uKxyeX06m7WJK4QAmqv1mPKqw
+      summary: Get All Jobs
+      operationId: GetAllJobs
+      parameters: []
       responses:
         '200':
-          description: Successful response
-          content:
-            application/json: {}
+          description: ''
+          headers: {}
+      deprecated: false
   /jobs/{id}:
     parameters:
       - in: path
@@ -112,42 +98,117 @@ paths:
     get:
       tags:
         - Jobs
-      summary: get single job
-      security:
-        - bearerAuth: []
+      summary: Get Single Job
+      operationId: GetSingleJob
+      parameters: []
       responses:
         '200':
-          description: Successful response
-          content:
-            application/json: {}
-  
+          description: ''
+          headers: {}
+      deprecated: false
+
     patch:
       tags:
         - Jobs
-      summary: update job
+      summary: Update Job
+      operationId: UpdateJob
+      parameters: []
       requestBody:
+        description: ''
         content:
           application/json:
             schema:
-              type: object
-              example:
-                company: random
-                position: fullstack dev
-      security:
-        - bearerAuth: []
+              $ref: '#/components/schemas/UpdateJobRequest'
+            example:
+              company: random
+              position: intern
+        required: true
       responses:
         '200':
-          description: Successful response
-          content:
-            application/json: {}
+          description: ''
+          headers: {}
+      deprecated: false
     delete:
       tags:
         - Jobs
-      summary: delete job
-      security:
-        - bearerAuth: []
+      summary: Delete Job
+      operationId: DeleteJob
+      parameters: []
       responses:
         '200':
-          description: Successful response
-          content:
-            application/json: {}
+          description: ''
+          headers: {}
+      deprecated: false
+components:
+  schemas:
+    RegisterUserRequest:
+      title: RegisterUserRequest
+      required:
+        - name
+        - email
+        - password
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        name: bob
+        email: bob@gmail.com
+        password: secret
+    LoginUserRequest:
+      title: LoginUserRequest
+      required:
+        - email
+        - password
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        email: susan@gmail.com
+        password: secret
+    CreateJobRequest:
+      title: CreateJobRequest
+      required:
+        - company
+        - position
+      type: object
+      properties:
+        company:
+          type: string
+        position:
+          type: string
+      example:
+        company: google
+        position: front-end developer
+    UpdateJobRequest:
+      title: UpdateJobRequest
+      required:
+        - company
+        - position
+      type: object
+      properties:
+        company:
+          type: string
+        position:
+          type: string
+      example:
+        company: random
+        position: intern
+  securitySchemes:
+    httpBearer:
+      type: http
+      scheme: bearer
+security:
+  - httpBearer: []
+tags:
+  - name: Auth
+    description: ''
+  - name: Jobs
+    description: ''
