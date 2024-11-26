@@ -4,7 +4,8 @@ info:
   contact: {}
   version: '1.0'
 servers:
-  - url: http://localhost:3000/api/v1
+  - url: https://jobs-api-production-642a.up.railway.app/api/v1
+  description: Production server
     variables: {}
 paths:
   /auth/register:
