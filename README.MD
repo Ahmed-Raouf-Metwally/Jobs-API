@@ -67,3 +67,7 @@ Swagger UI
       required: true
       description: the job id
 ```
+
+## API Documentation
+[Swagger UI](https://jobs-api-production-642a.up.railway.app/api-docs/) 
+
