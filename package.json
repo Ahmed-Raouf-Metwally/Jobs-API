@@ -1,7 +1,7 @@
 {
-  "name": "06-jobs-api",
+  "name": "jobs-api",
   "version": "1.0.0",
-  "description": "",
+  "description": "The Jobs API is a RESTful API built with Node.js, Express, and MongoDB designed to manage job listings. The application provides features for creating, reading, updating, and deleting job postings, allowing users to interact with job data seamlessly. This API allows companies to post job opportunities, and applicants to view and apply for jobs. It also supports user authentication, ensuring secure access to the API's functionalities.",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
