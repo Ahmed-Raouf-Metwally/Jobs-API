@@ -69,5 +69,9 @@ Swagger UI
 ```
 
 ## API Documentation
-[Swagger UI](https://jobs-api-production-642a.up.railway.app/api-docs/) 
 
+[Swagger UI](https://jobs-api-production-642a.up.railway.app/api-docs/)
+
+## Live Preview
+
+[Jobio](https://react-jobs-api-app.vercel.app/)
